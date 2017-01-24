@@ -1,8 +1,31 @@
-json = makeJsonObject(["val1", "val2", "val3"], [1, 2, 3]);
+/**
+ * makeJsonObject creates a JSON object and returns it to the user
+ * @param {String[]} attr - array of strings for your JSON object attributes
+ * @param {*}      values - whatever values you may want to assign to your attributes
+ * @return {JSON}         - returns a JSON object when condition is met 
+ *                        - returns false when condition is not met 
+ */
+function makeJsonObject(attr, values) {
+    var string = "{";
 
-console.log(json.val1);
-console.log(json.val2);
-console.log(json.val3);
+    if (attr.length != values.length) {
+        console.log("attr must be equal to values");
+        return false;
+    }
+
+    for (i = 0; i < attr.length; i++) {
+        if (i == attr.length - 1) {
+            string += '"' + attr[i] + '": "' + values[i] + '"}';
+        }
+        else {
+            string += '"' + attr[i] + '": "' + values[i] + '",';
+        }
+    }
+
+    jsonObject = JSON.parse(string);
+
+    return jsonObject;
+}
 
 /**
  * as the name suggests, the setCookie sets a cookie in your document. 
@@ -58,7 +81,6 @@ function getCookie(cname, flag) {
     return "";
 }
 
-
 /**
  * checks if a cookie is valid or present or not 
  * @param {String} cname - name of the cookie 
@@ -71,33 +93,4 @@ function checkCookie(cname) {
     } else {
         return false;
     }
-}
-
-/**
- * makeJsonObject creates a JSON object and returns it to the user
- * @param {String[]} attr - array of strings for your JSON object attributes
- * @param {*}      values - whatever values you may want to assign to your attributes
- * @return {JSON}         - returns a JSON object when condition is met 
- *                        - returns false when condition is not met 
- */
-function makeJsonObject(attr, values) {
-    var string = "{";
-
-    if (attr.length != values.length) {
-        console.log("attr must be equal to values");
-        return false;
-    }
-
-    for (i = 0; i < attr.length; i++) {
-        if (i == attr.length - 1) {
-            string += '"' + attr[i] + '": "' + values[i] + '"}';
-        }
-        else {
-            string += '"' + attr[i] + '": "' + values[i] + '",';
-        }
-    }
-
-    jsonObject = JSON.parse(string);
-
-    return jsonObject;
 }
